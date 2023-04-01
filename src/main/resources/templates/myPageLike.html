@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/myPageLike.css">
+    <script src="https://kit.fontawesome.com/946fabfe17.js" crossorigin="anonymous"></script>
+    </svg>
+</head>
+<body>
+<div class="myPageLike">
+    <div class="top">
+        <div class="topContent-wrap">
+            <div class="Logo" ></div>
+            <div class="right-bar">
+                <ul>
+                    <li class="topContent">마이페이지</li>
+                    <li class="topContent QnA">QnA</li>
+                    <li class="topContent notice">공지사항</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="middle-warp">
+        <div class="middle">
+            <div class="middleT">
+                <div class="memberimage_nickName">
+                    <div class="memberImage"></div>
+                    <div class="memberNickName" th:text="${memberNickName}">닉네임</div>
+                </div>
+                <div class="middleInfoTop">위시리스트</div>
+            </div>
+
+            <div class="middleM">
+                <div class="sidebar-wrap">
+                    <div class="sideBar">
+                        <ul>
+                            <li class="memberInfo"><a href="./information">회원정보</a></li>
+                            <li class="memberRservationInfo"><a href="./bookInfo">예약정보</a></li>
+                            <li class="wishList"><a href="./like"><strong>위시리스트</strong></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="middleInfo">
+                    <div class="likeCampInfo" th:if="${not #lists.isEmpty(likeCamps)}" th:each="likecamp:${likeCamps}">
+                        <div class="likeCampDetailInfo" th:object="${likecamp}">
+                            <div class="likeCampImage" th:style="'background-image:url('+${likecamp.getMyPageCampImageUrl()}+');'"></div>
+                            <ul>
+                                <li class="title">캠핑장 이름</li>
+                                <li class="content likeCampName" th:text="${likecamp.getMyPageCampName()}">캠핑장 이름</li>
+                                <li class="title">캠핑장 주소</li>
+                                <li class="content likeCampName" th:text="${likecamp.getMyPageCampAddress()}">캠핑장 주소</li>
+                                <li class="detailPageButton"><button class="detailPage" onclick="location.href='/camput/detail/{campName}';" th:value="${likecamp.getMyPageCampName()}">예약하기</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="reservationPages">
+                        <ul class="pagination"
+                            th:with="start=${(T(java.lang.Math).floor(likeCamps.getNumber()/5)*5) + 1},
+                                last=(${start + 4 < likeCamps.totalPages ? start + 4 : likeCamps.totalPages})">
+                            <li>
+                                <a th:href="@{/camput/myPage/like(page=1)}" aria-label="First">
+                                    <span aria-hidden="true"><i class="fa-solid fa-angles-left"></i></span>
+                                </a>
+                            </li>
+                            <li th:class="${likeCamps.first} ? 'disabled'">
+                                <a th:href="${likeCamps.first} ? '#' : @{/camput/myPage/like(page=${likeCamps.number})}" aria-label="Previous">
+                                    <span aria-hidden="true"><i class="fa-solid fa-angle-left"></i></span>
+                                </a>
+                            </li>
+                            <li th:each="page: ${#numbers.sequence(start,last)}" th:class="${page == likeCamps.number + 1} ? 'active'">
+                                <a th:text="${page}" th:href="@{/camput/myPage/like(page=${page})}"></a>
+                            </li>
+                            <li th:class="${likeCamps.last} ? 'disabled'">
+                                <a th:href="${likeCamps.last} ? '#' : @{/camput/myPage/like(page=${likeCamps.number + 2})}" aria-label="Next">
+                                    <span aria-hidden="true"><i class="fa-solid fa-angle-right"></i></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/camput/myPage/like(page=${totalPage})}" aria-label="Last">
+                                    <span aria-hidden="true"><i class="fa-solid fa-angles-right"></i></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="middleBottom"></div>
+</div>
+
+</body>
+</html>

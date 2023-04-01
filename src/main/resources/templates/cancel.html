@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/946fabfe17.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script th:inline="javascript">
+        var bookedDay = [[${info.bookedDay}]];
+        var startReservationDay = [[${info.startReservationDay}]];
+        var endReservationDay = [[${info.endReservationDay}]];
+        var campName = [[${info.campName}]];
+        var price = [[${info.price}]];
+    </script>
+    <script type="text/javascript" src="/js/cancel.js"></script>
+    <title>Reservation</title>
+</head>
+<body>
+<!-- 예약 페이지 & 결제 페이지 -->
+<!-- 예약하기 페이지 자체가 로그인 해야지만 갈 수 있게 설정해야된다. -->
+<header>
+    <!-- header01.html or hearder01.html -->
+</header>
+<div class="innercon" >
+    <div class="cancel_title">
+        <div class="title_img"></div>
+        <div class="title_txt">예약자 정보</div>
+    </div>
+    <div class="member_info" th:object="${info}">
+        <div class="name" th:text="*{memberName}"></div>
+        <div class="phone" th:text="*{memberPhone}"></div>
+    </div>
+    <div class="member_booking">
+        <div class="booking_con">
+            <table th:object="${info}">
+                <tr>
+                    <td colspan="2">숙소이름</td>
+                </tr>
+                <tr>
+                    <th colspan="2" th:text="*{campName}">캠프캠프</th>
+                </tr>
+                <tr>
+                    <td colspan="2">체크인</td>
+                </tr>
+                <tr>
+                    <td colspan="2" th:text="*{startReservationDay}"> 12:00</td>
+                </tr>
+                <tr>
+                    <td colspan="2">체크아웃</td>
+                </tr>
+                <tr>
+                    <th colspan="2" th:text="*{endReservationDay}"> 13:00</th>
+                </tr>
+            </table>
+        </div>
+        <div class="cancel_total">
+            <div class="price_total">
+                <form action="/camput/rservation/cancel/deleteReaervation" method="post"  th:object="${info}" class="finalReservation">
+                    <input type="hidden" th:value="*{bookedDay}" name="startReservationDay">
+                    <input type="hidden" th:value="*{startReservationDay}" name="startReservationDay">
+                    <input type="hidden" th:value="*{endReservationDay}" name="endReservationDay">
+                    <input type="hidden" th:value="*{campName}" name="campName">
+                    <input type="hidden" th:value="*{price}" name="price">
+                    <table th:object="${info}" >
+                        <tr>
+                            <td>구매총액</td>
+                            <th th:text="*{price}"></th>
+                        </tr>
+                        <tr>
+                            <td>현재보유포인트</td>
+                            <th th:text="*{point}"></th>
+                        </tr>
+                        <tr>
+                            <td>환불 후 포인트</td>
+                            <th th:text="*{afterMemberPoint}" style="color: green"><input type="hidden" name="afterPoint" th:value="*{afterMemberPoint}"></th>
+                        </tr>
+                    </table>
+                    <div class="cash"><button type="button" onclick="cancel()"><i class="fa-solid fa-money-check-dollar"></i>예약 취소하기</button></div>
+                </form>
+            </div>
+        </div>
+        <div class="cancelReservation" >
+            <div class="successCancel" style="display: none">
+                <div class="successTitle">예약취소가 완료되었습니다!</div>
+                <form class="goToHome" method="get" action="/camput/myPage/bookInfo">
+                    <button>HOME</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

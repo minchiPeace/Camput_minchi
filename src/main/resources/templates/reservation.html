@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/946fabfe17.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script th:inline="javascript">
+        var startReservationDay = [[${finalReservationInfo.startReservationDay}]];
+        var endReservationDay = [[${finalReservationInfo.endReservationDay}]];
+        var campName = [[${finalReservationInfo.campName}]];
+        var price = [[${finalReservationInfo.price}]];
+    </script>
+    <script type="text/javascript" src="/js/reservation.js"></script>
+    <title>Reservation</title>
+</head>
+<body>
+    <!-- 예약 페이지 & 결제 페이지 -->
+    <!-- 예약하기 페이지 자체가 로그인 해야지만 갈 수 있게 설정해야된다. -->
+    <header>
+    <!-- header01.html or hearder01.html -->
+    </header>
+    <div class="errorPage" th:value="${noPoint}" style="display:none;">
+        <div class="errBackGround">
+            <div class="errAlert">
+                <form th:action="'/camput/detail/'+${finalReservationInfo.getCampName()}" class="content" method="get">
+                    <div class="errContent">포인트가부족합니다</div>
+                    <button class="goToBack">뒤로가기</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="innercon" >
+        <div class="booking_title">
+            <div class="title_img"></div>
+            <div class="title_txt">예약자 정보</div>
+        </div>
+        <div class="member_info" th:object="${memberInfo}">
+            <div class="name" th:text="*{memberName}"></div>
+            <div class="phone" th:text="*{memberPhone}"></div>
+        </div>
+        <div class="member_booking">
+            <div class="booking_con">
+                <table th:object="${finalReservationInfo}">
+                    <tr>
+                        <td colspan="2">숙소이름</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" th:text="*{campName}">캠프캠프</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">기간</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">체크인</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" th:text="*{startReservationDay}"> 12:00</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">체크아웃</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" th:text="*{endReservationDay}"> 13:00</th>
+                    </tr>
+                    <tr>
+                        <td>구매총액</td>
+                        <th th:text="*{price}">원</th>
+                    </tr>
+                </table>
+            </div>
+            <div class="booking_total">
+                <div class="price_total">
+                    <form action="/camput/reservationPage/init" method="post"  th:object="${finalReservationInfo}" class="finalReservation">
+                        <input type="hidden" th:value="*{startReservationDay}" name="startReservationDay">
+
+                        <input type="hidden" th:value="*{endReservationDay}" name="endReservationDay">
+                        <input type="hidden" th:value="*{campName}" name="campName">
+                        <input type="hidden" th:value="*{price}" name="price">
+                        <table th:object="${memberInfo}" >
+                            <tr>
+                                <td>구매총액</td>
+                                <th th:text="${finalReservationInfo.price}">838,383원</th>
+                            </tr>
+                            <tr>
+                                <td>현재보유포인트</td>
+                                <th th:text="*{point}">200,000 P</th>
+                            </tr>
+                            <tr>
+                                <td>결제 후 포인트</td>
+                                <th th:text="*{afterMemberPoint}" style="color: #dc3545"><input type="hidden" name="afterPoint" th:value="*{afterMemberPoint}"></th>
+                            </tr>
+                        </table>
+                        <div class="cash"><button type="button" onclick="booking()"><i class="fa-solid fa-money-check-dollar"></i> 결제하기</button></div>
+                    </form>
+                </div>
+            </div>
+            <div class="withchReservation" >
+                    <div class="successReservation" style="display: none">
+                        <div class="successTitle">예약이 완료되었습니다!</div>
+                        <div class="successContent">홈페이지로 이동합니다.</div>
+                        <form class="goToHome" method="get" action="/camput/home">
+                            <button>HOME</button>
+                        </form>
+                    </div>
+                    <div class="cancelReservation" style="display: none">
+                        <div class="successTitle">예약이 꽉찾습니다!</div>
+                        <div class="successContent">이전페이지로 이동합니다.</div>
+                        <form class="goToBack" th:action="'/camput/detail/'+${finalReservationInfo.campName}" method="get" >
+                            <button>이전페이지로</button>
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </div> 
+</body>
+</html>

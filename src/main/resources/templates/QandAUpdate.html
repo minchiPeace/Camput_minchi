@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script th:inline="javascript" src="/js/QandAUpdate.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <title>Update</title>
+</head>
+<style>
+    .layout{
+        width : 500px;
+        margin : 0 auto;
+        margin-top : 40px;
+    }
+
+    .layout input {
+        width : 100%;
+        box-sizing : border-box
+    }
+
+    .layout textarea {
+        width : 100%;
+        margin-top : 10px;
+        min-height : 300px;
+    }
+
+</style>
+<body>
+<div class="layout">
+  <form th:action="@{/QnA/update/{id}(id = ${qna.id})}" method="post">
+    <input name="qnaTitle" type="text" th:value="${qna.qnaTitle}">
+    <textarea name="qnaContent" th:text="${qna.qnaContent}"></textarea>
+    <input type="hidden" name="qnaUpdateDate" th:value="${qna.qnaUpdateDate}">
+    <button type="submit">수정</button>
+  </form>
+</div>
+</body>
+</html>

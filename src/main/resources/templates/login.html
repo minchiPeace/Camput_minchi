@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <!-- css -->
+    <link rel="stylesheet" href="/css/login.css" />
+    <!-- 아이콘 -->
+    <script src="https://kit.fontawesome.com/946fabfe17.js" crossorigin="anonymous"></script>
+    <!--    스크립트 -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
+            integrity="sha384-dpu02ieKC6NUeKFoGMOKz6102CLEWi9+5RQjWSV0ikYSFFd8M3Wp2reIcquJOemx" crossorigin="anonymous"></script>
+    <script>
+      Kakao.init('e3cb72ae1e875c47e83a78a91d17b8dd'); // 사용하려는 앱의 JavaScript 키 입력
+    </script>
+
+    <style>
+      .field-error {
+        border-color: #dc3545;
+        color: #dc3545;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 로그인 페이지 -->
+    <div class="wrap">
+      <div class="backImg">
+        <div class="innercon">
+          <div class="main">
+            <!-- 로고 -->
+            <div class="logo"><a href="home"></a></div>
+            <!-- 로그인 입력 -->
+            <form class="loginform" action="/camput/login" method="post" th:object="${LoginDto}">
+              <input type="text" name="memberLoginId" id="memberLoginId" th:field="*{memberLoginId}" placeholder="ID" />
+              <div class="field-error" th:if="${#fields.hasErrors('memberLoginId')}" th:errors="*{memberLoginId}"></div>
+              <!--                    로그인 오류 메세지 -->
+              <input type="password" name="memberPassword" id="memberPassword" th:field="*{memberPassword}" placeholder="Password" />
+              <div class="field-error" th:errors="*{memberPassword}" th:if="${#fields.hasErrors('memberPassword')}"></div>
+              <!--                    비밀번호 오류 메세지-->
+              <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
+              <!-- 아이디, 비밀번호 찾기 & 회원가입 링크 -->
+              <div class="loginSub">
+                <a href="findId">아이디 찾기</a>
+                <a href="findPw">비밀번호 찾기</a>
+                <a href="join">회원가입</a>
+              </div>
+              <input class="loginBtn" type="submit" value="LOGIN" />
+            </form>
+                <div class="kakao_login">
+                    <a id="kakao-login-btn" href="javascript:loginWithKakao()">
+                        <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
+                          alt="카카오 로그인 버튼" />
+                      </a>
+                      <p id="token-result"></p>
+                </div>
+          </div>
+        <!--            <div class="kakao_login">-->
+        <!--                <a id="kakao-login-btn" href="javascript:loginWithKakao()">-->
+        <!--                    <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"-->
+        <!--                      alt="카카오 로그인 버튼" />-->
+        <!--                  </a>-->
+        <!--                  <p id="token-result"></p>-->
+        <!--            </div>-->
+      </div>
+    </div>
+    <!-- JavaScript Libraries -->
+<!--    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js" integrity="sha384-dpu02ieKC6NUeKFoGMOKz6102CLEWi9+5RQjWSV0ikYSFFd8M3Wp2reIcquJOemx" crossorigin="anonymous"></script>-->
+<!--    <script>-->
+<!--      Kakao.init("e3cb72ae1e875c47e83a78a91d17b8dd");-->
+<!--    </script>-->
+   <script>
+     function loginWithKakao() {
+     /* var  const url = 'https://kauth.kakao.com/oauth/authorize?client_id=' +
+               'e3cb72ae1e875c47e83a78a91d17b8dd' +
+               '&redirect_uri=' +
+               'http://localhost:8081/camput/login/api-login'+
+               '&response_type=code&' +
+               'scope=account_email birthday gender profile_nickname'*/
+       Kakao.Auth.authorize({
+         redirectUri:'http://localhost:8081/camput/login/api-login',
+
+       });
+     }
+    </script>
+  </body>
+</html>

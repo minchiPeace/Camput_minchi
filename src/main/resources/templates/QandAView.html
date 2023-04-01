@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script th:inline="javascript" src="/js/QandAView.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <title>게시글 상세 페이지</title>
+
+    <script>
+        $(document).ready(function () {
+            $('#comment-write-btn').click(function () {
+                $.ajax({
+                    type: 'post',
+                    url: '/QnA/insert/answer',
+                    data: {
+                        id: $('#qnaId').val(),
+                        qnaAnswer: $('#commentContents').val()
+                    },
+                    success: function (response) {
+                        console.log('success')
+                        location.reload();
+                    },
+                    error: function (error) {
+                        console.log('error', error)
+                    }
+                })
+            })
+
+        })
+
+        function updateAnswer (id, qnaId) {
+            console.log($('input[name=" + id + "]').val());
+             $.ajax({
+                type: 'post',
+                url: '/QnA/update/answer',
+                data: {
+                    id: id,
+                    qAnswer: $('input[name=' + id + ']').val(),
+                    qnaId: qnaId
+                },
+                success: function (response) {
+                    console.log('success')
+                    location.reload();
+                },
+                error: function (error) {
+                    console.log('error', error)
+              }
+            })
+        }
+    </script>
+</head>
+<body>
+    <h1 th:text="${qna.qnaTitle}"></h1>
+    <p th:text="${qna.qnaContent}"></p>
+
+    <a th:if="${loginMember == qna.memberLoginId}" th:href="@{/QnA/delete(id=${qna.id})}">글삭제</a>
+    <a th:if="${loginMember == qna.memberLoginId}" th:href="@{/QnA/modify/{id}(id = ${qna.id})}">수정</a>
+
+    <!-- 댓글 작성부분 -->
+    <div id="comment-write">
+        <input type="text" id="commentWriter" th:value="${loginMember}" readonly>
+        <input type="text" id="commentContents" placeholder="내용을 입력하세요">
+        <input type="hidden" id="qnaId" th:value="${qna.id}">
+        <input type="button" id="comment-write-btn" value="댓글작성">
+    </div>
+
+
+    <div id="comment-list">
+        <div th:each="answer, i : ${qnaAnswerList}">
+            <span th:text="${answer.memberLoginId}"></span>
+            <input th:value="${answer.qAnswer}" th:if="${loginMember == answer.memberLoginId}" th:name="${answer.id}">
+            <span th:text="${answer.qAnswer}" th:if="${loginMember != answer.memberLoginId}"></span>
+            <span th:text="${answer.reqActDate}"></span>
+            <a th:if="${loginMember == answer.memberLoginId}" th:href="@{/QnA/delete/answer/{id}/{qnaId}(id = ${answer.id}, qnaId = ${qna.id})}" id="answerDeleteBtn">삭제</a>
+            <a th:if="${loginMember == answer.memberLoginId}" th:onclick="|javascript:updateAnswer(${answer.id}, ${qna.id})|" id="answerUpdateBtn">수정</a>
+        </div>
+    </div>
+</body>
+</html>
+
+

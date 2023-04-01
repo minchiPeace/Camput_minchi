@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <script type="text/javascript" src="/js/myPageMemberInfo.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/myPage.css">
+</head>
+<body>
+<div class="modal">
+    <div class="checkMember-wrap" >
+        <div class="checkMember">
+            <div class="checkMemberTitle" >
+                <div class="titleName">비밀번호 확인</div>
+                <button type="button" class="close" onclick="hideWindow()">X</button></div>
+            <div class="content">비밀번호를 입력해주세요.</div>
+            <div class="contentInput">
+                <input class="pwCheck" type="text" placeholder="  비밀번호를 입력해주세요." onclick="hideWarring()" value="">
+                <div class="warring" style="color: red;display: none" >비밀번호가 일치하지 않습니다</div>
+                <button type="button" class="memberInfoChange" onclick="checkMember()">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="myPageMemberInfo">
+    <div class="top">
+        <div class="topContent-wrap">
+            <div class="Logo" ></div>
+            <div class="right-bar">
+                <ul>
+                    <li class="topContent">마이페이지</li>
+                    <li class="topContent">QnA</li>
+                    <li class="topContent">공지사항</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="middle-warp">
+        <div class="middle">
+            <div class="middleT">
+                <div class="memberimage_nickName">
+                    <div class="memberImage"></div>
+                    <div class="memberNickName" th:text="${nickName}">닉네임</div>
+                </div>
+                <div class="middleInfoTop">회원정보</div>
+            </div>
+
+            <div class="middleM">
+                <div class="sidebar_warp">
+                    <div class="sideBar">
+                        <ul>
+                            <li class="memberInfo"><a href="./information">회원정보</a></li>
+                            <li class="memberRservationInfo"><a href="./bookInfo">예약정보</a></li>
+                            <li class="wishList"><a href="./like">위시리스트</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="middleInfo">
+                    <div class="middleInfoContent" th:object="${memberInfo}">
+                        <ul>
+                            <li class="title">이름</li>
+                            <li class="name" th:text="*{name}">김씨</li>
+                            <li class="title">아이디</li>
+                            <li class="id" th:text="*{memberLoginId}">asd123</li>
+                            <li class="title">이메일</li>
+                            <li class="email" th:text="*{memberEmail}">asd123@naver.com</li>
+                            <li class="title">생일</li>
+                            <li class="birth" th:text="*{memberBirth}">1997.11.04</li>
+                            <li class="title">성</li>
+                            <li class="gender" th:text="*{gender}">남</li>
+                            <li class="title">주소</li>
+                            <li class="address" th:text="*{memberAddress}">서울에서 살고 싶어요</li>
+                            <li class="title">전화번호</li>
+                            <li class="phoneNum" th:text="*{memberPhoneNum}">010-1234-1234</li>
+                        </ul>
+                    </div>
+                    <div class="middleBottom">
+                        <div class="wrap">
+                        </div>
+                        <button type="button" class="openCheckWindow" onclick="showCheckWindow()">회원정보 수정</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+</body>
+</html>

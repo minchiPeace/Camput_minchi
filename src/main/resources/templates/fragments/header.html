@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/allLayout}">
+
+    <div class="wrap-top fixed" th:fragment="headerFragment">
+        <header>
+        <!-- header01 -->
+            <div class="Logo"><a th:href="@{/camput/home}"></a></div>
+            <div class="nav notLogin">
+                <ul class="menuBtn">
+                    <li class="nologin"><a th:href="@{/camput/login}">Login</a></li>
+                    <li class="join"><a th:href="@{/camput/member/join}">Join</a></li>
+                </ul>
+            </div>
+            <!-- 메뉴 -->
+            <div class="menu Login" style="display: none;">
+                <ul class="menuBtn">
+                    <li class="login"><a href="@{/camput/myPage/information}">마이페이지</a></li>
+                    <li class="join"><a href="@{/camput/logout}">로그아웃</a></li>
+                    <li class="menu">
+                    <a href="#"><i class="fa-solid fa-bars"></i></a>
+                        <ul class="miniMenu" style="display: none;">
+                            <li class="qandA gnb_menu"><a th:href="@{/camput/myPage/like}">위시리스트</a></li>
+                            <li class="qandA gnb_menu"><a th:href="@{/camput/myPage/bookInfo}">예약리스트</a></li>
+                            <li class="qandA gnb_menu"><a th:href="@{/camput/QnA/list}">Q & A</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        </div>
+</html>

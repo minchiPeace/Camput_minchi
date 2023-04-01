@@ -1,0 +1,480 @@
+@import url("/css/reset.css");
+/* 라인 */
+@font-face { font-family: 'LINESeedKR-Bd'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2'); font-weight: 700; font-style: normal; }
+/* 티머니 */
+@font-face { font-family: 'TmoneyRoundWindExtraBold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/TmoneyRoundWindExtraBold.woff') format('woff'); font-weight: normal; font-style: normal; }
+*{font-family:'TmoneyRoundWindExtraBold'; -webkit-text-size-adjust: auto;}
+/* 화면 구성 */
+.wrap
+{height: 100%; width: 100%;
+    overflow-y:scroll;
+    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+}
+/* 스크롤제거 */
+body{
+    -ms-overflow-style: none; /* 인터넷 익스플로러 */
+    scrollbar-width: none; /* 파이어폭스 */
+}
+::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 오페라, 엣지 */
+}
+/* 메뉴바 */
+header{
+    position: fixed;
+    top: 0;left: 0;right: 0;z-index: 6;
+    height: 15%; width: 100%;
+    background-color: rgba( 255, 255, 255, 0.1);
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.Logo{
+    margin-left: 5%;
+    width: 10%; padding-bottom: 7%;
+    background-image: url("/img/logo.png");
+    background-size:contain ;
+    background-repeat: no-repeat;
+}
+/* 메뉴 */
+.nav{
+    width: 20%;
+    margin-right: 5%;
+    display: flex;
+    justify-content: flex-end;
+    margin: 5%;
+    font-size: 1.2vw;
+}
+.menuBtn{
+    width: 100%;
+    display: inline-flex;
+}
+.menuBtn li{width: 100%; font-size: 1.8vw;}
+.menuBtn .menu{position: relative;}
+.menu li{position: absolute; width:100%; height: 100%; right: 80%;}
+.menu .qandA{top: 200%;}
+/* 사이드 메뉴 */
+.miniMenu{display: none;}
+.miniMenu li{font-size: 1.5vw; width: 100%; text-align: right;}
+
+/*--------------------------------상단 동일 구역 ---------------------------*/
+
+/* .sec_cal {
+    width: 360px;
+    margin: 0 auto;
+    font-family: "NotoSansR";
+}
+
+.sec_cal .cal_nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 78px;
+}
+
+.sec_cal .cal_nav .year-month {
+    width: 300px;
+    text-align: center;
+    line-height: 1;
+}
+
+.sec_cal .cal_nav .nav {
+    display: flex;
+    border: 1px solid #333333;
+    border-radius: 5px;
+}
+
+.sec_cal .cal_nav .go-prev,
+.sec_cal .cal_nav .go-next {
+    display: block;
+    width: 50px;
+    height: 78px;
+    font-size: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sec_cal .cal_nav .go-prev::before,
+.sec_cal .cal_nav .go-next::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #000;
+    border-width: 3px 3px 0 0;
+    transition: border 0.1s;
+}
+
+.sec_cal .cal_nav .go-prev:hover::before,
+.sec_cal .cal_nav .go-next:hover::before {
+    border-color: #ed2a61;
+}
+
+.sec_cal .cal_nav .go-prev::before {
+    transform: rotate(-135deg);
+}
+
+.sec_cal .cal_nav .go-next::before {
+    transform: rotate(45deg);
+}
+
+.sec_cal .cal_wrap {
+    padding-top: 40px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.sec_cal .cal_wrap .days {
+    display: flex;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.sec_cal .cal_wrap::after {
+    top: 368px;
+}
+
+.sec_cal .cal_wrap .day {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% / 7);
+    text-align: left;
+    color: #999;
+    font-size: 12px;
+    text-align: center;
+    border-radius:5px
+}
+
+.current.today {background: rgb(242 242 242);}
+
+.sec_cal .cal_wrap .dates {
+    display: flex;
+    flex-flow: wrap;
+    height: 290px;
+}
+
+.sec_cal .cal_wrap .day:nth-child(7n -1) {
+    color: #3c6ffa;
+}
+
+.sec_cal .cal_wrap .day:nth-child(7n) {
+    color: #ed2a61;
+}
+
+.sec_cal .cal_wrap .day.disable {
+    color: #ddd;
+}
+ */
+
+
+/*///////////////////////////////////////////////////////////////////////////////////////////////
+*/
+
+
+.sec_cal {
+    width: 360px;
+    margin: 0 auto;
+    font-family: "NotoSansR";
+}
+
+.sec_cal .cal_nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 78px;
+}
+
+.sec_cal .cal_nav .year-month {
+    width: 300px;
+    text-align: center;
+    line-height: 1;
+}
+
+.sec_cal .cal_nav .nav {
+    display: flex;
+    border: 1px solid #333333;
+    border-radius: 5px;
+}
+
+.sec_cal .cal_nav .go-prevend,
+.sec_cal .cal_nav .go-nextend {
+    display: block;
+    width: 50px;
+    height: 78px;
+    font-size: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sec_cal .cal_nav .go-prevend::before,
+.sec_cal .cal_nav .go-nextend::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #000;
+    border-width: 3px 3px 0 0;
+    transition: border 0.1s;
+}
+
+.sec_cal .cal_nav .go-prevend:hover::before,
+.sec_cal .cal_nav .go-nextend:hover::before {
+    border-color: #ed2a61;
+}
+
+.sec_cal .cal_nav .go-prevend::before {transform: rotate(-135deg);}
+
+.sec_cal .cal_nav .go-nextend::before {transform: rotate(45deg);}
+
+.sec_cal .cal_wrap {
+    padding-top: 40px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.sec_cal .cal_wrap .days {
+    display: flex;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.sec_cal .cal_wrap::after {top: 368px;}
+
+.sec_cal .cal_wrap .day {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% / 7);
+    text-align: left;
+    color: #999;
+    font-size: 12px;
+    text-align: center;
+    border-radius:5px
+}
+
+.current.today {background: rgb(242 242 242);}
+
+.sec_cal .cal_wrap .dates {
+    display: flex;
+    flex-flow: wrap;
+    height: 290px;
+}
+
+.sec_cal .cal_wrap .day:nth-child(7n -1) {color: #3c6ffa;}
+.sec_cal .cal_wrap .day:nth-child(7n) {color: #ed2a61;}
+.sec_cal .cal_wrap .day.disable {color: #ddd;}
+
+/*-------------------------------- css 작업 ---------------------------*/
+.innercon{
+    width: 80%; height: 100vh;
+    margin: 25vh auto;
+}
+.camp_main{
+    display: flex;
+    margin: 1% 0;
+}
+.camp_main .cmap_img{width: 50%;}
+.camp_main .cmap_img .main_img{
+    width: 80%; margin: 10%;
+    box-sizing: border-box; overflow: hidden;
+}
+.main_img img{
+    width: 100%; height: 100%;
+    object-fit:contain;
+}
+.camp_main .camp_txt{
+    width: 50%; font-size: 1.3vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    padding-left: 2%;
+}
+.camp_main .camp_txt .camp_title{font-size: 5vw;}
+.camp_main .camp_txt .camp_addr{font-size: 2vw;}
+.camp_main .camp_txt p{font-size: 2vw;}
+.camp_main .camp_txt .capm_owner{font-size: 1.3vw;}
+.camp_main .camp_txt .likeCount{font-size: 2vw;}
+/* 하트 */
+.likeButton{
+    border: 0;
+    background-color: unset;
+    font-size: 2.5vw;
+    padding-left: 5%;
+}
+.likeButton i{
+    color: transparent;
+    text-shadow: 0 0 1px rgba(255,255,255,0.9), 0 0 0 rgb(0, 0, 0);
+}
+.likeButton i:hover {text-shadow: 0 0 0 #ffa600;}
+.likeButton i.done {color: #ed2a61;text-shadow: 0;}
+.likeButton i.done:hover {color: transparent;text-shadow: 0 0 0 #ffa600;}
+
+/* 메인 타이틀 */
+.roomInfo_Booking{
+    width: 100%; height: 100%;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    background-color: rgba(255, 255, 255, 0.6 );
+    box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.4);
+}
+.roomInfo_Booking .main_title_btn{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+.go{
+    border: 0;
+    background-color: unset;
+    font-size: 2vw;
+    padding: 1% 0 1% 5%;
+    font-family:'TmoneyRoundWindExtraBold';
+}
+.main_title_info{display: none;}
+.detail_info{
+    padding: 3%; width: 90%; height: 100%;
+    font-size: 2vw;
+}
+.slideBtn{
+    border: 0;
+    background-color: unset;
+    font-size: 2vw;
+    font-family:'TmoneyRoundWindExtraBold';
+}
+.openBooking{
+    /*display: none;*/
+    width: 90%; height: 80vh;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* 달력 */
+.reservationCalendar{
+    display: flex;
+}
+
+/* 리뷰 */
+.review{}
+.newReBtn button{
+    padding: 1%; margin: 2% auto; width: 20%; font-size: 2vw; font-family: 'TmoneyRoundWindExtraBold';
+    box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.4);
+    border-radius: 10px; border: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #ffa600;
+}
+/* 리뷰 글쓰기 창 */
+/* 모달 창 관련 css */
+#modal {
+    position:fixed; left:0;top:0;
+    width: 100%; height: 100%; 
+    display: none;
+    /* display: flex; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color:rgba(0, 0, 0, 0.7);
+}/* 뒤에 부분 설정*/
+.newReview {
+    position: absolute;left: 35%;top: 25%;
+    width: 35%; height: 55vh; z-index:100;
+    margin: 1% auto;
+    padding: 5% 0;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000;
+    border: 3px solid #ffa600;
+    border-radius: 30px;
+    box-sizing: border-box;
+    overflow: hidden;
+
+}/* 창부분 설정*/
+/* 리뷰폼 */
+.newpost{position: absolute; top:0; width: 100%;}
+.newpost .npTitle{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #FFa600;
+    border-radius: 20px 20px 0 0;
+}
+.newpost .npTitle p{padding:2% 5%; font-size: 1.5vw; color: #fff;}
+.newpost .npTitle a{
+    padding:2% 4%; font-size: 1.5vw; color: #fff;
+    border: 0; background-color: unset;
+}
+/* 별점 */
+.star_line{width: 100%; padding: 2% 0;}
+.star_line p {color: #000; font-size: 1.3vw;}
+.star {
+    position: relative;
+    font-size: 3vw;
+    color: #ddd;
+}
+.star input {
+    width: 100%; height: 100%; position: absolute;
+    left: 0; opacity: 0; cursor: pointer;
+}
+.star span {
+    width: 0;position: absolute;left: 0;
+    color: #FFCF00;overflow: hidden;
+    pointer-events: none;
+}
+.comment{resize:none;width: 50%; height: 20vh;}
+/* 리뷰사진 */
+.re_potoarea td:nth-child(2){
+    display: flex;
+    align-items: flex-end;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+.re_poto{
+    border: 1px solid #333; width: 80px; height: 80px;
+    overflow: hidden;
+}
+#blah{box-sizing: border-box; object-fit: scale-down;}
+input[type=file]{display: none;}
+.re_pic{
+    display: flex; padding: 2%;
+    align-items: center;
+    justify-content: space-around;
+}
+.re_pic button{
+    background-color: unset;
+    border: 0;
+}
+.re_pic i {color: #000; font-size: 2vw;}
+
+/* 버튼 */
+.npBtn{
+    width: 100%;
+    text-align:center;
+}
+.npBtn input{
+    /* box-shadow: 10px 10px 20px 1px rgba(0, 0, 0, 0.4); */
+    border-radius: 20px; border: 0;
+    color: #fff;
+    margin: 1% 4%; width: 25%; font-size: 1.5vw;
+    font-family: 'TmoneyRoundWindExtraBold';
+}
+.sub_btn{background-color: rgba(0, 0, 0, 0.6);}
+.sub_btn:hover{background-color: #ffa600;}
+.re_btn{background-color: rgba(0, 0, 0, 0.3);}
+.re_btn:hover{background-color: #ffa600b2;}
